@@ -1,4 +1,4 @@
-# OperatingSystem
+# Operating Systems
 This project involves hands-on practices on: 
 - Unix/ Linux commands and basic shell programming
 - Programming in C and use of system calls
