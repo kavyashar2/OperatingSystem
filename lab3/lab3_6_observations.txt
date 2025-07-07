@@ -1,0 +1,9 @@
+Name: Kavya Sharma
+Date: 10/9/2024
+Title: Lab3 – Part 6 Observations
+Description: Observations for part 6 of Lab 3
+
+Observations:
+- There are 10 threads with values of i going from 0 to 9
+- The numbers and threads are printed out of order
+- The processes run asynchronously and don't wait for each other before terminating
