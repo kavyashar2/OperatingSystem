@@ -1,0 +1,114 @@
+Minix Setup, Kernel Modification, and Compilation Guide
+
+I. Setting Up Minix in VirtualBox
+
+1. Access the ECC Linux Systems (for SCU students, if required):
+      - Use NoMachine to connect to an ECC Linux system with GUI support.
+      - Use the connection format linux215<>.dc.engr.scu.edu, replacing <> with numbers from 01 to 24.
+
+2. Open VirtualBox:
+      - On ECC or your local machine, open a terminal and type:
+          bash
+          virtualbox
+          
+      - Or open VirtualBox from Activities > Show Applications if you are on a graphical interface.
+
+3. Configure Network in VirtualBox:
+      - Go to Tools > Networks > Host-only Networks > Create.
+      - Enable DHCP server in the properties and apply the settings to create vboxnet0.
+
+4. Import the Minix Image:
+      - Go to File > Import Appliance in VirtualBox.
+      - Select /local/Vbox/minix3-1-7.ova (or your downloaded Minix file).
+      - In Settings, ensure MAC Address Policy is set to "Generate new MAC addresses for all network adapters."
+      - Click Finish to complete the import.
+
+5. Setup Network Adapter:
+      - Select your imported Minix VM, go to Settings > Network.
+      - Set Adapter 1 to Host-only Adapter, and choose vboxnet0 as Name.
+
+6. Start the Minix VM:
+      - Boot up Minix by selecting Start.
+      - Login as root (no password initially).
+      - Set a password for root by typing:
+          bash
+          passwd
+
+II. Accessing Files in Minix
+
+1. Find the Minix IP Address:
+      - Inside the Minix terminal, type:
+          bash
+          ifconfig
+          
+      - Note down the IP address displayed, which you'll use to connect via FTP.
+
+2. Start the FTP Daemon:
+      - Enable FTP on Minix for file transfer:
+          bash
+          tcpd ftp in.ftpd &
+          
+      
+3. Connect to Minix Files from the Host System:
+      - GUI Access:
+          - In your file browser on the host, go to Other Locations.
+          - In Connect to Server, type:
+              plaintext
+              ftp://<Minix_IP>
+              
+              Replace <Minix_IP> with the actual IP address.
+      - Terminal Access:
+          - Open a terminal on the host system.
+          - Type:
+              bash
+              ftp <Minix_IP>
+              
+              Log in using your Minix username and password.
+
+III. Modifying the Kernel Boot Message
+
+1. Locate the Boot Message File:
+      - Use grep to search for the boot message text in Minix:
+          bash
+          grep "Copyright /usr/src/*/*
+          
+
+2. Edit the Boot Message File:
+      - Once you locate the file, you can edit it using a text editor.
+      - Add your name or a custom message to the boot-up message line.
+      - Example of a message modification:
+          c
+          printf("Welcome to Minix - YourName CSEN 177\n");
+
+IV. Recompiling the Minix Kernel
+
+1. Navigate to the Source Directory:
+      - Change to the /usr/src directory, which contains Minix's kernel source code:
+          bash
+          cd /usr/src
+          
+
+2. Compile the Kernel with make world:
+      - Type the following command to rebuild Minix with your modifications:
+          bash
+          make world
+          
+      - This process may take some time as it recompiles the entire system.
+
+3. Reboot Minix:
+      - After recompilation, reboot Minix to load the modified kernel:
+          bash
+          shutdown
+          
+      - Alternatively, you can use reboot to restart without fully powering down.
+
+4. Verify the Changes:
+      - When Minix restarts, look for your modified boot message during startup to confirm that your changes took effect.
+
+V. Troubleshooting and Resetting Minix (if needed)
+
+- If Minix Fails to Boot:
+      - Re-import the Minix VM in VirtualBox:
+          - Go to File > Import Appliance and select the Minix image file again.
+          - Follow the previous steps to set up the network adapter and boot Minix.
+      - If files were corrupted, you may need to start fresh with a clean copy of Minix by re-importing.
