@@ -1,0 +1,6 @@
+Observations:
+- In threadSync.c, threads are synchronized using a semaphore. This makes sure only one thread can access the critical section at a time. In contrast, threadHello.c allows all threads to run at the same time without synchronization, leading to possible race conditions.
+
+- In threadSync.c, the semaphore enforces sequential access to the critical section. This makes the execution of threads orderly. In threadHello.c, the order of thread execution is not controlled, so threads print their messages in a random order.
+
+- threadHello.c incorrectly passes the same variable i to all threads, potentially causing incorrect thread numbers to be printed, while threadSync.c properly manages synchronization and thread execution.
