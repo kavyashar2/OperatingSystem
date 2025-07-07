@@ -1,0 +1,6 @@
+Observations:
+- Every time I run the program, the threads are printed out of order. Sometimes two threads have the same thread ID as well.
+- The thread order changes each time the program is run.
+- The results are the same if there as some other demanding task running (I streamed a video at the same time to test this).
+- The parameter variable in the go() function, arg is a per-thread variable. The compiler stores arg in the Thread Local Storage (TLS).
+- The global variable i is a shared state. The compiler stores i in the thread's stack.

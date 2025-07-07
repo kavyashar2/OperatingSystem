@@ -1,0 +1,3 @@
+Observations:
+- All the child threads do not run and thus aren't printed out. This is because the main thread finishes running before some of the child threads run.
+- The main thread no longer has to wait for the children threads to finish running.
